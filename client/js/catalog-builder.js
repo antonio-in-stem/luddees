@@ -110,8 +110,14 @@
 
     function bootCatalog() {
         if (window.LuddiesAuth && window.LuddiesAuth.usesApi && window.LuddiesAuth.usesApi() && window.LuddiesAuth.loadProducts) {
+            var loadError = document.getElementById("catalog-load-error");
             renderCatalog();
-            window.LuddiesAuth.loadProducts().then(renderCatalog).catch(renderCatalog);
+            window.LuddiesAuth.loadProducts().then(function () {
+                if (loadError) loadError.classList.add("d-none");
+                renderCatalog();
+            }).catch(function () {
+                if (loadError) loadError.classList.remove("d-none");
+            });
         } else {
             renderCatalog();
         }

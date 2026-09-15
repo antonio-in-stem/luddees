@@ -36,6 +36,15 @@
                     var err = new Error((data && data.error) || res.statusText || "http_error");
                     err.status = res.status;
                     err.body = data;
+                    if (res.status === 401) {
+                        if (window.LuddiesAuth && window.LuddiesAuth.clearPrivateClientState) {
+                            window.LuddiesAuth.clearPrivateClientState();
+                        } else {
+                            localStorage.removeItem("luddies.session");
+                            localStorage.removeItem("luddies.users");
+                        }
+                        document.dispatchEvent(new CustomEvent("luddies:session-expired"));
+                    }
                     throw err;
                 }
                 return data;

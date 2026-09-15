@@ -57,10 +57,13 @@ class ApiAccessTests {
             .andExpect(status().isOk()).andExpect(jsonPath("$.passwordHash").doesNotExist()).andReturn();
         var session = (MockHttpSession) result.getRequest().getSession(false);
         assertNotNull(session);
+        mvc.perform(get("/api/auth/session").session(session)).andExpect(status().isOk())
+            .andExpect(jsonPath("$.email").value("qa@example.test"));
         mvc.perform(get("/api/users").session(session)).andExpect(status().isOk())
             .andExpect(jsonPath("$[0].passwordHash").doesNotExist());
         mvc.perform(post("/api/auth/logout").session(session)).andExpect(status().isNoContent());
         assertTrue(session.isInvalid());
+        mvc.perform(get("/api/auth/session")).andExpect(status().isUnauthorized());
     }
 
     @Test void regularUsersCannotAccessAdministrationOrForgePayments() throws Exception {

@@ -46,6 +46,21 @@ public class AuthController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/session")
+    public ResponseEntity<?> session(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null || !(session.getAttribute("userId") instanceof Long userId)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "authentication_required"));
+        }
+        return authService.currentUser(userId)
+                .<ResponseEntity<?>>map(ResponseEntity::ok)
+                .orElseGet(() -> {
+                    session.invalidate();
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                            .body(Map.of("error", "authentication_required"));
+                });
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody AuthRegisterRequest body) {
         try {

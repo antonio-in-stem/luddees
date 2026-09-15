@@ -25,6 +25,7 @@
 
     var SEED_PASSWORD = "123456";
     var RESERVED_ADMIN = "admin@luddies.com.mx";
+    var apiUsers = [];
 
     function usesApi() {
         return window.LuddiesApi && window.LuddiesApi.uses();
@@ -71,33 +72,15 @@
 
     function ensureCatalog() {
         if (usesApi()) return;
+        if (localStorage.getItem(KEYS.CATALOG_INITIALIZED) === "1") return;
         var p = readJson(KEYS.PRODUCTS, null);
         var seed = window.LUDDIES_CATALOG_SEED;
         if (!seed || !seed.length) {
             console.error("[LuddiesAuth] LUDDIES_CATALOG_SEED missing; load catalog-seed.js first");
             return;
         }
-        if (p && p.length) {
-            var seedById = {};
-            seed.forEach(function (row) {
-                seedById[String(row.id)] = Object.assign({ custom: false, purchasable: 1 }, row);
-            });
-            var seen = {};
-            var merged = p.map(function (row) {
-                var id = String(row && row.id);
-                if (row && !row.custom && seedById[id]) {
-                    seen[id] = true;
-                    return seedById[id];
-                }
-                return row;
-            });
-            seed.forEach(function (row) {
-                var id = String(row.id);
-                if (!seen[id] && !merged.some(function (existing) { return String(existing && existing.id) === id; })) {
-                    merged.push(Object.assign({ custom: false, purchasable: 1 }, row));
-                }
-            });
-            writeJson(KEYS.PRODUCTS, merged);
+        if (Array.isArray(p)) {
+            localStorage.setItem(KEYS.CATALOG_INITIALIZED, "1");
             return;
         }
         writeJson(
@@ -106,10 +89,14 @@
                 return Object.assign({ custom: false, purchasable: 1 }, row);
             })
         );
+        localStorage.setItem(KEYS.CATALOG_INITIALIZED, "1");
     }
 
     function init() {
         if (!KEYS) return;
+        if (usesApi()) {
+            localStorage.removeItem(KEYS.USERS);
+        }
         if (window.console && console.info && !usesApi()) {
             console.info(
                 "[Luddies] Modo demo: apiBaseUrl vacío. Registro/login y datos van a localStorage. " +
@@ -138,7 +125,40 @@
         });
     }
 
+    function clearPrivateClientState() {
+        apiUsers = [];
+        localStorage.removeItem(KEYS.SESSION);
+        localStorage.removeItem(KEYS.USERS);
+        sessionStorage.removeItem("luddies.payment_stub");
+        sessionStorage.removeItem("luddies.payment_receipt");
+        sessionStorage.removeItem("luddies.checkout_profile");
+        sessionStorage.removeItem("luddies.contact_prefill");
+    }
+
+    function reconcileSession() {
+        if (!usesApi()) return Promise.resolve(getSession());
+        if (!getSession()) return Promise.resolve(null);
+        return window.LuddiesApi.getJson("/api/auth/session")
+            .then(function (body) {
+                var user = mapAuthUserBody(body);
+                if (!user) {
+                    clearPrivateClientState();
+                    return null;
+                }
+                setSession(user);
+                return getSession();
+            })
+            .catch(function (error) {
+                if (error && error.status === 401) {
+                    clearPrivateClientState();
+                    return null;
+                }
+                throw error;
+            });
+    }
+
     function getUsers() {
+        if (usesApi()) return apiUsers.slice();
         return readJson(KEYS.USERS, []).slice();
     }
 
@@ -206,13 +226,7 @@
 
     function logout() {
         var request = usesApi() ? window.LuddiesApi.postJson("/api/auth/logout", {}) : Promise.resolve();
-        return request.then(function () {
-            setSession(null);
-            sessionStorage.removeItem("luddies.payment_stub");
-            sessionStorage.removeItem("luddies.payment_receipt");
-            sessionStorage.removeItem("luddies.checkout_profile");
-            sessionStorage.removeItem("luddies.contact_prefill");
-        });
+        return request.then(clearPrivateClientState, clearPrivateClientState);
     }
 
     function syncRegister(payload) {
@@ -318,7 +332,7 @@
         }
         return window.LuddiesApi.getJson("/api/users").then(function (list) {
             var mapped = (list || []).map(mapApiUserRow);
-            writeJson(KEYS.USERS, mapped);
+            apiUsers = mapped;
             return mapped;
         });
     }
@@ -354,13 +368,9 @@
                 })
             );
         }).then(function (rows) {
-            if (!rows || !rows.length) {
-                return getProducts();
-            }
+            rows = Array.isArray(rows) ? rows : [];
             writeJson(KEYS.PRODUCTS, rows);
             return rows;
-        }).catch(function () {
-            return getProducts();
         });
     }
 
@@ -605,6 +615,8 @@
         loadUsers: loadUsers,
         getSession: getSession,
         setSession: setSession,
+        reconcileSession: reconcileSession,
+        clearPrivateClientState: clearPrivateClientState,
         getUsers: getUsers,
         getUserByEmail: getUserByEmail,
         login: login,

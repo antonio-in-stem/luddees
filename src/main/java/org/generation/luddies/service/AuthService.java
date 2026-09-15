@@ -59,6 +59,15 @@ public class AuthService {
         return Optional.of(toResponse(u));
     }
 
+    public Optional<AuthUserResponse> currentUser(Long userId) {
+        if (userId == null) {
+            return Optional.empty();
+        }
+        return userRepository.findById(userId)
+                .filter(User::isActive)
+                .map(this::toResponse);
+    }
+
     @Transactional
     public AuthUserResponse register(AuthRegisterRequest req) {
         if (req == null || req.getEmail() == null || req.getPassword() == null) {

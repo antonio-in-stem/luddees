@@ -229,6 +229,8 @@
 
     function readForm() {
         var fImg = document.getElementById("f-img");
+        var priceEs = document.getElementById("product-price-es").value.trim();
+        var priceEn = document.getElementById("product-price-en").value.trim();
         return {
             id: document.getElementById("product-id").value.trim(),
             img: fImg ? fImg.value.trim() : "",
@@ -239,15 +241,16 @@
                     name: document.getElementById("product-name-es").value.trim(),
                     description: document.getElementById("product-desc-es").value.trim(),
                     meta: document.getElementById("product-meta-es").value.trim(),
-                    price: document.getElementById("product-price-es").value.trim()
+                    price: priceEs
                 },
                 en: {
                     name: document.getElementById("product-name-en").value.trim(),
                     description: document.getElementById("product-desc-en").value.trim(),
                     meta: document.getElementById("product-meta-en").value.trim(),
-                    price: document.getElementById("product-price-en").value.trim()
+                    price: priceEn
                 }
-            }
+            },
+            priceAmount: window.LuddiesMoney ? window.LuddiesMoney.parsePrice(priceEs) : NaN
         };
     }
 
@@ -261,6 +264,11 @@
         if (!data.labels.es.description || !data.labels.en.description) return "admin_error_required_fields";
         if (!data.labels.es.meta || !data.labels.en.meta) return "admin_error_required_fields";
         if (!data.labels.es.price || !data.labels.en.price) return "admin_error_required_fields";
+        var amountEs = window.LuddiesMoney ? window.LuddiesMoney.parsePrice(data.labels.es.price) : NaN;
+        var amountEn = window.LuddiesMoney ? window.LuddiesMoney.parsePrice(data.labels.en.price) : NaN;
+        if (!Number.isFinite(amountEs) || !Number.isFinite(amountEn) || amountEs !== amountEn) {
+            return "admin_error_price_invalid";
+        }
         return null;
     }
 

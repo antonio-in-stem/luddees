@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "test": "node --test tests/*.test.cjs",
-    "check": "node scripts/check-client.cjs"
+    "check": "node scripts/check-client.cjs && node scripts/sync-product-seed.cjs --check",
+    "sync:catalog-seed": "node scripts/sync-product-seed.cjs"
   },
   "devDependencies": {
     "acorn": "^8.15.0",

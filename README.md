@@ -32,7 +32,6 @@ src/main/java/                  Spring Boot application and REST API
 src/test/java/                  server integration tests
 server/src_db/main/resources/   MySQL schema and seed data
 tests/                          client behavior tests
-docs/                           QA, internationalization, and visual identity
 ```
 
 Spring Boot exposes the API under `/api/**` and packages `client/` as static
@@ -83,19 +82,18 @@ npm test
 
 Java tests use H2 and do not require local MySQL credentials. Continuous
 integration runs the same client checks and server build for every change to
-`main`. The complete review scope is available in
-[docs/qa-report.md](docs/qa-report.md).
+`main`.
 
 ## Release artifact
 
 Each backend release may include an executable Spring Boot JAR. The
-`luddies-1.0.0.jar` asset contains the API, runtime dependencies, and the web
+`luddies-VERSION.jar` asset contains the API, runtime dependencies, and the web
 client in one deployable file. It is not a desktop installer.
 
 After configuring the database environment variables, run it with:
 
 ```shell
-java -jar luddies-1.0.0.jar
+java -jar luddies-VERSION.jar
 ```
 
 The source archives attached automatically by GitHub remain available for
@@ -115,13 +113,9 @@ Account recovery, email verification, distributed rate limiting, and a
 provider-verified webhook checkout remain requirements before processing real
 transactions.
 
-## Documentation
+## Changelog
 
-- [Quality assurance report](docs/qa-report.md)
-- [Internationalization strategy](docs/i18n-strategy.md)
-- [Visual identity system](docs/visual-identity/DESIGN.md)
-- [Production prompt masters](docs/visual-identity/PROMPT-MASTERS.md)
-- [Changelog](CHANGELOG.md)
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## Origin and authorship
 

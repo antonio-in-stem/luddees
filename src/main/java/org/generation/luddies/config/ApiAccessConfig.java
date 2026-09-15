@@ -38,7 +38,7 @@ public class ApiAccessConfig implements WebMvcConfigurer, HandlerInterceptor {
             }
         }
         if (path.equals("/api/auth/login") || path.equals("/api/auth/register")
-                || path.equals("/api/auth/logout")) return true;
+                || path.equals("/api/auth/logout") || path.equals("/api/auth/session")) return true;
         if (readOnly && path.matches("/api/(products|categories|product-categories)(/.*)?")) return true;
         var session = request.getSession(false);
         if (session == null || !(session.getAttribute("userId") instanceof Long userId)) {

@@ -22,16 +22,20 @@
     }
 
     function parseMoneyAmount(a, b) {
-        function one(s) {
-            var m = String(s || "")
-                .replace(/,/g, ".")
-                .match(/(\d+(\.\d+)?)/);
-            return m ? parseFloat(m[1]) : NaN;
-        }
-        var x = one(a);
-        if (!isNaN(x)) return x;
-        var y = one(b);
-        if (!isNaN(y)) return y;
+        var money = window.LuddiesMoney;
+        if (!money || !money.parsePrice) return NaN;
+        var x = money.parsePrice(String(a || ""));
+        if (Number.isFinite(x)) return x;
+        var y = money.parsePrice(String(b || ""));
+        if (Number.isFinite(y)) return y;
+        return NaN;
+    }
+
+    function productAmount(form, es, en) {
+        var explicit = Number(form.priceAmount);
+        if (Number.isFinite(explicit) && explicit >= 0) return explicit;
+        var parsed = parseMoneyAmount(es.price, en.price);
+        if (Number.isFinite(parsed) && parsed >= 0) return parsed;
         return 0;
     }
 
@@ -71,7 +75,7 @@
         var labels = form.labels || {};
         var es = labels.es || {};
         var en = labels.en || {};
-        var amount = parseMoneyAmount(es.price, en.price);
+        var amount = productAmount(form, es, en);
         var isCustom = existing && existing.apiIsCustom !== undefined ? !!existing.apiIsCustom : true;
         var isActive = existing && existing.apiIsActive !== undefined ? !!existing.apiIsActive : true;
         return {
