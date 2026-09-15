@@ -131,16 +131,6 @@
     margin-top: 1.25rem;
 }
 
-.page-auth__demo-notice {
-    padding: .75rem;
-    margin-bottom: 1rem;
-    border-radius: .75rem;
-    background: #eeebfa;
-    color: #343449;
-    font-size: .78rem;
-    line-height: 1.45;
-}
-
 .page-auth__footer a {
     color: var(--primary-accent, #a29bfe);
     font-weight: 600;
