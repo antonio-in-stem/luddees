@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Partial: header</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-glass" aria-label="Main navigation">
+        <div class="container py-2">
+            <a class="navbar-brand fw-semibold d-flex align-items-center gap-2" href="index.html">
+                <div class="logo-container">
+                    <img data-luddies-brand-logo src="../images/luddees/identity-v2/brand/luddies-mark-white.svg" alt=""
+                        class="brand-logo-img" data-i18n="logo_alt">
+                </div>
+                <span class="brand-name" data-i18n="brand_name">Luddies</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#luddiesNavbar"
+                aria-controls="luddiesNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="luddiesNavbar">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html" data-nav="home">
+                            <i class="fas fa-home me-1" aria-hidden="true"></i><span data-i18n="nav_home">Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalog.html" data-nav="catalog">
+                            <i class="fas fa-book me-1" aria-hidden="true"></i><span
+                                data-i18n="nav_catalog">Catalogo</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about-us.html" data-nav="about">
+                            <i class="fas fa-circle-info me-1" aria-hidden="true"></i><span
+                                data-i18n="nav_about">Nosotros</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" data-nav="contact">
+                            <i class="fas fa-envelope me-1" aria-hidden="true"></i><span
+                                data-i18n="nav_contact">Contacto</span>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-popup-wrap" id="nav-item-login">
+                        <a class="nav-link" href="login.html" id="nav-login-link" data-nav="login"
+                            aria-describedby="nav-register-popup">
+                            <i class="fas fa-right-to-bracket me-1" aria-hidden="true"></i>
+                            <span data-i18n="nav_login">Iniciar sesión</span>
+                        </a>
+
+                        <div class="nav-popup" id="nav-register-popup" role="tooltip" aria-hidden="true">
+                            <p class="nav-popup__hint" data-i18n="auth_no_account">¿Aún no tienes cuenta?</p>
+                            <a class="nav-popup__cta btn-luddies btn-luddies--primary" href="register.html"
+                                data-i18n="auth_link_register">
+                                Crear cuenta
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item" id="nav-item-checkout" hidden>
+                        <a class="nav-link" href="checkout.html" data-nav="checkout">
+                            <i class="fas fa-bag-shopping me-1" aria-hidden="true"></i><span
+                                data-i18n="nav_checkout">Seleccion</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="nav-item-admin" hidden>
+                        <a class="nav-link" href="admin.html" data-nav="admin">
+                            <i class="fas fa-gear me-1" aria-hidden="true"></i><span data-i18n="nav_admin">Admin</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="nav-item-logout" hidden>
+                        <a class="nav-link" href="#" id="luddies-logout-link">
+                            <i class="fas fa-right-from-bracket me-1" aria-hidden="true"></i><span
+                                data-i18n="nav_logout">Log out</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
+                        <button type="button" id="lang-toggle" class="btn btn-sm btn-luddies px-3 lang-toggle-btn"
+                            lang="en">EN</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lh-gotop-container">
+        <div class="lh-gotop-button">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+    </div>
+</body>
+
+</html>

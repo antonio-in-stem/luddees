@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Luddies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../style/tokens.css">
+    <link rel="stylesheet" href="../style/base.css">
+    <link rel="stylesheet" href="../style/components.css">
+    <link rel="stylesheet" href="../style/layout.css">
+    <link rel="stylesheet" href="../style/luddees.css?v=visual-v33">
+    <link rel="stylesheet" href="../style/responsive.css?v=qa-v1">
+    <link rel="stylesheet" href="../style/pages/contact.css?v=contact-studio-v9">
+    <script src="../js/luddies-storage-keys.js"></script>
+    <script src="../js/catalog-seed.js"></script>
+    <script src="../js/config.js?v=api-mode-v2"></script>
+    <script src="../js/luddies-api.js"></script>
+    <script src="../js/catalog-api-mapper.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/auth-guard.js"></script>
+</head>
+<body class="page-contact" data-site-page="contact">
+    <header id="site-header"></header>
+
+    <main class="contact-main">
+        <section class="hero-about contact-hero">
+            <div class="container contact-hero__stage">
+                    <div class="contact-hero__copy fade-in">
+                        <h1 class="hero-title mb-3" data-i18n="contact_hero_title"></h1>
+                        <p class="hero-lead mb-0" data-i18n="contact_hero_lead"></p>
+                    </div>
+                    <picture class="contact-hero__render fade-in" aria-hidden="true">
+                        <source srcset="../images/luddees/identity-v2/contact/contact-hero-mailbox-v1.webp" type="image/webp">
+                        <img src="../images/luddees/identity-v2/contact/contact-hero-mailbox-v1.png" width="1536" height="720" alt="">
+                    </picture>
+            </div>
+        </section>
+
+        <section class="page-section pt-0 contact-body-section">
+            <div class="container">
+                <div class="contact-unified-card">
+    <div class="row g-0">
+
+        <div class="col-12 col-lg-7 contact-form-col">
+            <div class="contact-panel__inner">
+
+                <div class="success-banner" id="successBanner" role="alert" aria-live="polite">
+                    <div class="success-icon"></div>
+                    <h3 data-i18n="success_title"></h3>
+                    <p data-i18n="success_msg"></p>
+                    <button type="button" class="btn btn-luddies btn-luddies--secondary" id="btnNewMessage" data-i18n="btn_clear_form"></button>
+                </div>
+
+                <header class="contact-form-header">
+                    <h2 class="section-title mb-2" data-i18n="contact_form_title"></h2>
+                    <p class="contact-form-intro mb-0" data-i18n="contact_form_intro"></p>
+                </header>
+
+                <form id="contactUsForm" novalidate>
+
+                    <div class="contact-form-section">
+                        <h3 class="contact-section-heading" data-i18n="contact_section_details"></h3>
+
+                        <div class="row g-3 mb-4 contact-fields-pair">
+                            <div class="col-12 col-sm-6 contact-field contact-field--name">
+                                <picture class="contact-field-icon" aria-hidden="true">
+                                    <source srcset="../images/luddees/identity-v2/contact/field-name-v2.webp" type="image/webp">
+                                    <img src="../images/luddees/identity-v2/contact/field-name-v2.png" width="512" height="512" alt="">
+                                </picture>
+                                <div class="contact-field__body">
+                                    <label class="form-label-luddies" for="inputNombre">
+                                        <span data-i18n="lbl_nombre"></span> <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control-luddies w-100" id="inputNombre" name="nombre"
+                                        data-i18n-placeholder="ph_nombre" placeholder=""
+                                        autocomplete="name" required minlength="2" maxlength="60"
+                                        pattern="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s'\-]+$"
+                                        aria-describedby="errorNombre">
+                                    <p class="error-msg" id="errorNombre" role="alert">
+                                        <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                                        <span id="errorNombreText"></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 contact-field contact-field--email">
+                                <picture class="contact-field-icon" aria-hidden="true">
+                                    <source srcset="../images/luddees/identity-v2/contact/field-email-v2.webp" type="image/webp">
+                                    <img src="../images/luddees/identity-v2/contact/field-email-v2.png" width="512" height="512" alt="">
+                                </picture>
+                                <div class="contact-field__body">
+                                    <label class="form-label-luddies" for="inputCorreo">
+                                        <span data-i18n="lbl_correo"></span> <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" class="form-control-luddies w-100" id="inputCorreo" name="correo"
+                                        data-i18n-placeholder="ph_correo" placeholder=""
+                                        autocomplete="email" required aria-describedby="errorCorreo">
+                                    <p class="error-msg" id="errorCorreo" role="alert">
+                                        <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                                        <span id="errorCorreoText"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-0 contact-field contact-field--subject">
+                            <picture class="contact-field-icon" aria-hidden="true">
+                                <source srcset="../images/luddees/identity-v2/contact/field-subject-v2.webp" type="image/webp">
+                                <img src="../images/luddees/identity-v2/contact/field-subject-v2.png" width="512" height="512" alt="">
+                            </picture>
+                            <div class="contact-field__body">
+                                <label class="form-label-luddies" for="inputAsunto">
+                                    <span data-i18n="lbl_asunto"></span> <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-control-luddies w-100" id="inputAsunto" name="asunto"
+                                    required aria-describedby="errorAsunto">
+                                <option value="" data-i18n="opt_asunto_placeholder"></option>
+                                <option value="informacion" data-i18n="opt_informacion"></option>
+                                <option value="cursos" data-i18n="opt_cursos"></option>
+                                <option value="colaboracion" data-i18n="opt_colaboracion"></option>
+                                <option value="soporte" data-i18n="opt_soporte"></option>
+                                <option value="educador" data-i18n="opt_educador">Soy educador / institución</option>
+                                <option value="prensa" data-i18n="opt_prensa">Prensa y medios</option>
+                                <option value="otro" data-i18n="opt_otro"></option>
+                                </select>
+                                <p class="error-msg" id="errorAsunto" role="alert">
+                                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                                    <span id="errorAsuntoText"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-section contact-form-section--message">
+                        <h3 class="contact-section-heading" data-i18n="contact_section_message"></h3>
+                        <div class="mb-3 contact-field contact-field--message">
+                            <picture class="contact-field-icon" aria-hidden="true">
+                                <source srcset="../images/luddees/identity-v2/contact/field-message-v2.webp" type="image/webp">
+                                <img src="../images/luddees/identity-v2/contact/field-message-v2.png" width="512" height="512" alt="">
+                            </picture>
+                            <div class="contact-field__body">
+                                <label class="form-label-luddies" for="inputMensaje">
+                                    <span data-i18n="lbl_mensaje"></span> <span class="text-danger">*</span>
+                                </label>
+                                <textarea class="form-control-luddies form-control-luddies--message w-100"
+                                    id="inputMensaje" name="mensaje"
+                                    placeholder="Cuéntanos cómo podemos ayudarte…"
+                                    rows="6" required minlength="10" maxlength="500"
+                                    aria-describedby="errorMensaje charCounterMensaje"></textarea>
+                                <p class="char-counter" id="charCounterMensaje" aria-live="polite">0 / 500</p>
+                                <p class="error-msg" id="errorMensaje" role="alert">
+                                    <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                                    <span id="errorMensajeText"></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit btn-luddies btn-luddies--submit"
+                            id="btnSubmit">
+                            <span class="spinner-btn" aria-hidden="true"></span>
+                            <span class="btn-text">
+                                <i class="fas fa-paper-plane me-2" aria-hidden="true"></i>
+                                <span data-i18n="btn_send"></span>
+                            </span>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-5 contact-side-col">
+
+            <div class="contact-side-col__inner">
+
+                <h2 class="section-title mb-1 info-card-title" data-i18n="info_card_title"></h2>
+                <p class="mb-4 info-card-copy" data-i18n="info_card_copy"></p>
+
+                <div class="info-item">
+                    <div class="pill-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
+                    <div class="info-text">
+                        <strong data-i18n="info_email_lbl"></strong>
+                        <span>luddiesholdings@outlook.com</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="pill-icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></div>
+                    <div class="info-text">
+                        <strong data-i18n="info_hours_lbl"></strong>
+                        <span data-i18n="info_hours_val"></span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="pill-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+                    <div class="info-text">
+                        <strong data-i18n="info_location_lbl"></strong>
+                        <span data-i18n="info_location_val"></span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="pill-icon"><i class="fa-solid fa-reply" aria-hidden="true"></i></div>
+                    <div class="info-text">
+                        <strong data-i18n="info_response_lbl"></strong>
+                        <span data-i18n="info_response_val"></span>
+                    </div>
+                </div>
+
+                <div class="contact-side-socials">
+                    <p class="contact-side-socials__label" data-i18n="footer_explore_title"></p>
+                    <div class="footer-socials" aria-label="Redes sociales">
+                        <a href="https://www.facebook.com/LuddiesHoldings/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/luddiesholdings/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/luddies-holdings/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="https://x.com/Luddies_Holding" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+                        <a href="https://github.com/LuddiesHoldings" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <picture class="contact-side-render" aria-hidden="true">
+                    <source srcset="../images/luddees/identity-v2/contact/contact-support-reply-cutout-v3.webp" type="image/webp">
+                    <img src="../images/luddees/identity-v2/contact/contact-support-reply-cutout-v3.png" width="880" height="897" alt="">
+                </picture>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="site-footer" class="footer-lite"></footer>
+
+    <script src="../js/layout.js?v=nav-stability-v1"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script defer src="../js/i18n.js"></script>
+    <script defer src="../js/brand-assets.js?v=visual-v9"></script>
+    <script defer src="../js/auth-ui.js?v=nav-login-v2"></script>
+    <script defer src="../js/fade-in.js"></script>
+    <script defer src="../js/contact-form.js"></script>
+</body>
+</html>

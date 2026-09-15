@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>404 | Luddies</title>
+    <link rel="stylesheet" href="/style/tokens.css">
+    <link rel="stylesheet" href="/style/base.css">
+    <link rel="stylesheet" href="/style/components.css">
+    <link rel="stylesheet" href="/style/pages/error.css?v=error-v2">
+</head>
+<body class="page-error">
+    <main class="error-page">
+        <nav class="error-nav" aria-label="Navegación de error">
+            <a class="error-brand" href="/html/index.html" data-i18n-aria="nav_home">
+                <img src="/images/luddees/identity-v2/brand/luddies-mark-white.svg" width="42" height="42" alt="" data-i18n="logo_alt">
+                <span data-i18n="brand_name">Luddies</span>
+            </a>
+            <button type="button" id="lang-toggle" class="error-language" lang="en" aria-label="Cambiar idioma" data-i18n-aria="error_404_language_toggle">EN</button>
+        </nav>
+
+        <section class="error-hero" aria-labelledby="error-title">
+            <div class="error-copy">
+                <p class="error-kicker"><span aria-hidden="true">404</span> · <span data-i18n="error_404_kicker">Recurso extraviado</span></p>
+                <h1 id="error-title" data-i18n="error_404_title">Este activo se nos escondió.</h1>
+                <p class="error-lead" data-i18n="error_404_lead">Buscamos en cada carpeta, pero esta página no está aquí. Volvamos a un lugar conocido.</p>
+                <div class="error-actions">
+                    <a class="error-button error-button--primary" href="/html/index.html" data-i18n="error_404_home">Volver al inicio</a>
+                    <a class="error-button error-button--secondary" href="/html/catalog.html" data-i18n="error_404_catalog">Explorar el catálogo</a>
+                </div>
+                <p class="error-note" data-i18n="error_404_note">Error 404 · La ruta existe en el mapa, pero no en Luddies.</p>
+            </div>
+
+            <div class="error-scene" aria-hidden="true">
+                <div class="error-code"><span>4</span><span>0</span><span>4</span></div>
+                <picture class="error-render">
+                    <source srcset="/images/luddees/identity-v2/errors/luddies-search-party-404-v1.webp" type="image/webp">
+                    <img src="/images/luddees/identity-v2/errors/luddies-search-party-404-v1.png" width="1536" height="1024" alt="">
+                </picture>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/i18n.js"></script>
+</body>
+</html>

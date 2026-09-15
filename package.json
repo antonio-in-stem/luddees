@@ -1,0 +1,13 @@
+{
+  "name": "luddies-quality-checks",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "check": "node scripts/check-client.cjs"
+  },
+  "devDependencies": {
+    "acorn": "^8.15.0",
+    "postcss": "^8.5.6",
+    "parse5": "^7.3.0"
+  }
+}

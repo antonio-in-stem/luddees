@@ -1,0 +1,142 @@
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+.hero-about .fade-in { opacity: 1; transform: none; }
+:focus-visible { outline: 3px solid #8176bc; outline-offset: 3px; }
+
+@media (min-width: 992px) and (max-width: 1599.98px) {
+    .page-home .hero-image-wrap { width: 64vw; right: -3rem; }
+    .page-home .hero-image-wrap img { right: 0; transform: scale(1.03); }
+}
+
+@media (max-width: 991.98px) {
+    img, picture { max-width: 100%; }
+    body .hero-about { overflow: hidden; }
+    body .contact-hero__stage,
+    body .checkout-hero__stage,
+    body .payment-hero__stage,
+    body .legal-hero__stage,
+    body .admin-hero__stage {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+        min-height: 0;
+    }
+    body.page-contact .contact-hero,
+    body.page-checkout .checkout-hero,
+    body.page-pago .pago-hero,
+    body.page-legal .legal-hero,
+    body.page-admin .hero-about.admin-hero {
+        min-height: 0;
+        padding-top: calc(7.5rem + env(safe-area-inset-top, 0px)) !important;
+        padding-bottom: 2rem;
+    }
+    body .contact-hero__copy,
+    body .checkout-hero__copy,
+    body .payment-hero__copy,
+    body .legal-hero__copy,
+    body .admin-hero__copy { max-width: 42rem; padding: 0; margin: 0; }
+    body:is(.page-admin, .page-checkout, .page-pago, .page-legal, .page-contact, .page-catalog) .hero-about .hero-title {
+        max-width: 100%;
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        line-height: 1.05;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+    body .hero-about .hero-lead { max-width: 42rem; font-size: 1.05rem; }
+    body .checkout-hero__render,
+    body .payment-hero__render,
+    body .legal-hero__render,
+    body .admin-hero__render {
+        position: relative;
+        inset: auto;
+        align-self: center;
+        width: min(100%, 28rem);
+        height: auto;
+        margin: 0;
+        transform: none;
+    }
+    body .contact-hero__render {
+        position: relative;
+        inset: auto;
+        align-self: center;
+        width: min(100%, 36rem);
+        height: clamp(15rem, 64vw, 25rem);
+        overflow: hidden;
+    }
+    body .contact-hero__render img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right bottom;
+        transform: none;
+    }
+    body.page-contact .contact-body-section,
+    body.page-admin .admin-workspace,
+    body .payment-unified-card { margin-top: 0; }
+    body.page-catalog .catalog-hero,
+    body .catalog-hero__stage { min-height: 0; }
+    body .catalog-hero__art { width: 100%; margin: 1rem 0 0; }
+    body .luddees-hero-stage { display: block; }
+    body .luddees-hero-stage > .row { width: auto; }
+    body .luddees-hero-art { min-height: 0; padding: 0; }
+    body.page-home .hero-image-wrap {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 4 / 3;
+    }
+    body.page-home .hero-image-wrap img { object-fit: contain; object-position: center bottom; }
+    body.page-checkout .checkout-empty:not([hidden]) { grid-template-columns: minmax(0, 1fr); }
+    body .checkout-empty__art { min-height: 0; }
+    body .checkout-empty__render { width: min(100%, 28rem); margin: 0; }
+    body .checkout-workspace .checkout-panel--cart { height: auto; max-height: none; min-height: 0; }
+    body .checkout-line { display: grid; grid-template-columns: 3.8rem minmax(0, 1fr); }
+    body .checkout-workspace .checkout-line__remove { grid-column: 2; justify-self: start; margin: 0; }
+    body .checkout-line__thumb { width: 3.8rem; height: 3.8rem; }
+    body .payment-total-box__head { flex-wrap: wrap; }
+    body .payment-confirmation-ref { overflow-wrap: anywhere; }
+    body .admin-toolbar { flex-wrap: wrap; gap: 1rem; }
+    body .admin-product-identity, body .admin-user-identity { flex-wrap: wrap; }
+    body .contact-side-render { max-width: 100%; margin-inline: 0; }
+}
+
+@media (max-width: 767.98px) {
+    body .container { padding-inline: 1.1rem; }
+    body .navbar-brand { margin-right: .5rem; }
+    body .page-auth__scene { min-height: 0; gap: 1.5rem; padding-bottom: 1rem; }
+    body .page-auth__scene .page-auth__card { width: 100%; margin: 0; }
+    body .page-auth__characters {
+        position: relative;
+        inset: auto;
+        grid-row: 2;
+        width: 100%;
+        transform: none;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        background: #343449;
+    }
+    body .contact-field,
+    body .contact-field--email,
+    body .contact-field--subject,
+    body .contact-field--message { grid-template-columns: 3.5rem minmax(0, 1fr); gap: .75rem; }
+    body .contact-field-icon { width: 100%; min-width: 0; }
+    body .contact-field__body { min-width: 0; }
+    body .contact-hero__render { height: clamp(15rem, 70vw, 22rem); }
+    body .payment-card-preview { padding: 1rem; }
+    body .payment-card-preview__number { font-size: clamp(.85rem, 4vw, 1.2rem); letter-spacing: .03em; }
+    body .product-support__render { max-width: 100%; }
+    body .cta-breakout-image { max-width: 100%; bottom: 0; }
+    body .process-render { max-width: 100%; width: 100%; bottom: 0; }
+    body .creator-cta-art { min-height: clamp(14rem, 65vw, 22rem); }
+    body .team-room { overflow: hidden; }
+    body input, body select, body textarea { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    .fade-in { opacity: 1; transform: none; }
+}

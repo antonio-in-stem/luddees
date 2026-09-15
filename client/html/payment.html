@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago | Luddies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../style/tokens.css">
+    <link rel="stylesheet" href="../style/base.css">
+    <link rel="stylesheet" href="../style/components.css">
+    <link rel="stylesheet" href="../style/layout.css">
+    <link rel="stylesheet" href="../style/luddees.css?v=visual-v37">
+    <link rel="stylesheet" href="../style/responsive.css?v=qa-v1">
+    <link rel="stylesheet" href="../style/pages/payment.css?v=payment-v3">
+    <script src="../js/luddies-storage-keys.js"></script>
+    <script src="../js/catalog-seed.js"></script>
+    <script src="../js/config.js?v=api-mode-v2"></script>
+    <script src="../js/luddies-api.js"></script>
+    <script src="../js/catalog-api-mapper.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/auth-guard.js"></script>
+</head>
+<body class="page-pago" data-site-page="payment">
+    <header id="site-header"></header>
+
+    <main class="payment-main">
+        <section class="hero-about pago-hero">
+            <div class="container payment-hero__stage">
+                <div class="payment-hero__copy fade-in">
+                    <span class="payment-hero__eyebrow"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i><span data-i18n="payment_hero_eyebrow"></span></span>
+                    <h1 class="hero-title mb-3" data-i18n="payment_stub_title"></h1>
+                    <p class="hero-lead mb-0" data-i18n="payment_hero_lead"></p>
+                </div>
+                <picture class="payment-hero__render fade-in" aria-hidden="true">
+                    <source srcset="../images/luddees/identity-v2/cta/creator-miga-v1.webp" type="image/webp">
+                    <img src="../images/luddees/identity-v2/cta/creator-miga-v1.png" width="1536" height="2048" alt="">
+                </picture>
+            </div>
+        </section>
+
+        <section class="page-section pt-0 payment-body-section">
+            <div class="container">
+                <div class="payment-unified-card fade-in">
+                    <header class="payment-workspace__intro">
+                        <div>
+                            <span class="payment-workspace__eyebrow" data-i18n="payment_workspace_eyebrow"></span>
+                            <h2 data-i18n="payment_workspace_title"></h2>
+                            <p data-i18n="payment_workspace_copy"></p>
+                        </div>
+                        <ol class="payment-progress" aria-label="Progreso de compra" data-i18n-aria="checkout_progress_label">
+                            <li class="is-complete"><span><i class="fa-solid fa-check" aria-hidden="true"></i></span><strong data-i18n="checkout_step_details"></strong></li>
+                            <li class="is-complete"><span><i class="fa-solid fa-check" aria-hidden="true"></i></span><strong data-i18n="checkout_step_review"></strong></li>
+                            <li class="is-active"><span>3</span><strong data-i18n="checkout_step_payment"></strong></li>
+                        </ol>
+                    </header>
+                    <div class="row g-0">
+                        <div class="col-12 col-lg-7 payment-form-col">
+                            <div class="payment-panel__inner">
+                                <div class="payment-alert payment-alert--danger" id="payment-error-banner" role="alert" hidden></div>
+
+                                <div id="payment-checkout-view">
+                                    <header class="payment-form-header">
+                                        <div>
+                                            <h2 class="section-title mb-2" data-i18n="payment_section_title"></h2>
+                                            <p class="payment-form-intro mb-0" data-i18n="payment_form_intro"></p>
+                                        </div>
+                                    </header>
+
+                                    <div class="payment-total-box mb-3">
+                                        <div class="payment-total-box__head">
+                                            <span class="payment-total-label" data-i18n="payment_total_label"></span>
+                                            <h3 class="payment-total-amount" id="payment-total">$0 MXN</h3>
+                                        </div>
+                                        <p class="payment-total-note mb-0" id="payment-cart-count">0 productos seleccionados</p>
+                                    </div>
+
+                                    <div class="payment-email-card">
+                                        <span aria-hidden="true"><i class="fa-solid fa-envelope"></i></span>
+                                        <div><p class="pago-stub-email-label mb-1" data-i18n="payment_email_label"></p><p class="pago-stub-email-value mb-0" id="payment-stub-email">No disponible</p></div>
+                                    </div>
+
+                                    <form id="payment-simulation-form" class="text-start mb-0" novalidate>
+                                        <div class="payment-field-card">
+                                            <span class="payment-field-card__icon" aria-hidden="true"><i class="fa-solid fa-credit-card"></i></span>
+                                            <div>
+                                                <label class="form-label-luddies small" for="cc-number" data-i18n="payment_card_label"></label>
+                                                <input type="tel" id="cc-number" class="form-control-luddies w-100" required maxlength="19" autocomplete="off" readonly aria-describedby="payment-card-help" data-i18n-placeholder="payment_card_placeholder">
+                                                <p class="payment-field-help mb-0" id="payment-card-help" data-i18n="payment_card_help"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 payment-compact-fields">
+                                            <div class="col-6">
+                                                <label class="form-label-luddies small" for="cc-exp" data-i18n="payment_exp_label"></label>
+                                                <input type="tel" id="cc-exp" class="form-control-luddies w-100" required maxlength="5" autocomplete="off" readonly aria-describedby="payment-exp-help" data-i18n-placeholder="payment_exp_placeholder">
+                                                <p class="payment-field-help mb-0" id="payment-exp-help" data-i18n="payment_exp_help"></p>
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="form-label-luddies small" for="cc-cvc" data-i18n="payment_cvc_label"></label>
+                                                <input type="password" id="cc-cvc" class="form-control-luddies w-100" required maxlength="4" autocomplete="off" readonly inputmode="numeric" aria-describedby="payment-cvc-help" data-i18n-placeholder="payment_cvc_placeholder">
+                                                <p class="payment-field-help mb-0" id="payment-cvc-help" data-i18n="payment_cvc_help"></p>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-luddies btn-luddies--primary w-100 mt-4" id="btn-simulate-pay">
+                                            <span data-i18n="payment_cta_confirm"></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </div>
+
+                                <div id="payment-success-view" class="payment-success" hidden>
+                                    <div class="payment-success__copy">
+                                        <div class="payment-success-icon mb-3"><i class="fa-solid fa-check"></i></div>
+                                        <span class="payment-success__eyebrow" data-i18n="payment_success_eyebrow"></span>
+                                        <h3 class="mb-2" data-i18n="payment_success_title"></h3>
+                                        <p class="mb-2" data-i18n="payment_success_msg"></p>
+                                        <p class="payment-confirmation-ref mb-4" id="payment-confirmation-ref" data-i18n="payment_reference_prefix">Referencia: --</p>
+                                    </div>
+                                    <picture class="payment-success__render" aria-hidden="true">
+                                        <source srcset="../images/luddees/identity-v2/payment/payment-success-lumo-v1.webp" type="image/webp">
+                                        <img src="../images/luddees/identity-v2/payment/payment-success-lumo-v1.png" width="1024" height="1536" alt="">
+                                    </picture>
+                                    <div class="payment-success__actions d-flex flex-wrap gap-3">
+                                        <a class="btn btn-luddies btn-luddies--primary" href="catalog.html" data-i18n="payment_stub_catalog"></a>
+                                        <a class="btn btn-luddies btn-luddies--outline" href="index.html" data-i18n="payment_stub_home"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-5 payment-side-col">
+                            <div class="payment-side-col__inner">
+                                <div class="payment-card-preview" aria-label="Vista previa de tarjeta Luddies" data-i18n-aria="payment_card_preview_label">
+                                    <div class="payment-card-preview__top"><span><i class="fa-solid fa-seedling" aria-hidden="true"></i> Luddies</span><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
+                                    <div class="payment-card-preview__chip" aria-hidden="true"></div>
+                                    <p class="payment-card-preview__number" id="payment-card-preview-number">•••• •••• •••• ••••</p>
+                                    <div class="payment-card-preview__meta"><span id="payment-card-preview-name">LUDDIES STEM</span><span id="payment-card-preview-exp">MM/YY</span></div>
+                                </div>
+                                <h2 class="section-title mb-1 info-card-title" data-i18n="payment_info_title"></h2>
+                                <p class="mb-4 info-card-copy" data-i18n="payment_info_copy"></p>
+
+                                <div class="info-item">
+                                    <div class="pill-icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></div>
+                                    <div class="info-text">
+                                        <strong data-i18n="payment_info_security_title"></strong>
+                                        <span data-i18n="payment_info_security_copy"></span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="pill-icon"><i class="fa-solid fa-receipt" aria-hidden="true"></i></div>
+                                    <div class="info-text">
+                                        <strong data-i18n="payment_info_total_title"></strong>
+                                        <span data-i18n="payment_info_total_copy"></span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="pill-icon"><i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i></div>
+                                    <div class="info-text">
+                                        <strong data-i18n="payment_info_confirmation_title"></strong>
+                                        <span data-i18n="payment_info_confirmation_copy"></span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="pill-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></div>
+                                    <div class="info-text">
+                                        <strong data-i18n="payment_info_support_title"></strong>
+                                        <span data-i18n="payment_info_support_copy"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="site-footer" class="footer-lite"></footer>
+
+    <script src="../js/layout.js?v=nav-stability-v1"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script defer src="../js/i18n.js"></script>
+    <script defer src="../js/brand-assets.js?v=visual-v9"></script>
+    <script defer src="../js/auth-ui.js?v=nav-login-v2"></script>
+    <script defer src="../js/fade-in.js"></script>
+    <script defer src="../js/catalog-cart.js"></script>
+    <script defer src="../js/money.js"></script>
+    <script defer src="../js/payment.js?v=payment-v2"></script>
+</body>
+</html>

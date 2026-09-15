@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog | Luddies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../style/tokens.css">
+    <link rel="stylesheet" href="../style/base.css">
+    <link rel="stylesheet" href="../style/components.css">
+    <link rel="stylesheet" href="../style/layout.css">
+    <link rel="stylesheet" href="../style/components/catalog-cart.css?v=cart-feedback-v1">
+    <link rel="stylesheet" href="../style/pages/catalog.css?v=catalog-v7">
+    <link rel="stylesheet" href="../style/luddees.css?v=visual-v33">
+    <link rel="stylesheet" href="../style/responsive.css?v=qa-v1">
+    <script src="../js/luddies-storage-keys.js"></script>
+    <script src="../js/catalog-seed.js?v=catalog-v2"></script>
+    <script src="../js/config.js?v=api-mode-v2"></script>
+    <script src="../js/luddies-api.js"></script>
+    <script src="../js/catalog-api-mapper.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/auth-guard.js"></script>
+</head>
+<body class="page-catalog" data-site-page="catalog">
+    <header id="site-header"></header>
+
+    <main>
+        <section class="hero-about catalog-hero">
+            <div class="container catalog-hero__stage">
+                    <div class="catalog-hero__copy text-center fade-in">
+                        <h1 class="hero-title mb-3" data-i18n="catalog_hero_title"></h1>
+                        <p class="hero-lead catalog-hero-lead mx-auto mb-0" data-i18n="catalog_hero_lead"></p>
+                    </div>
+                    <picture class="catalog-hero__art fade-in" aria-hidden="true">
+                        <img src="../images/luddees/identity-v2/catalog/catalog-hero-library-v1.webp" width="1536" height="1024" alt="">
+                    </picture>
+            </div>
+        </section>
+
+        <section class="page-section pt-0" id="destacados" aria-label="Catalog">
+            <div class="container">
+                <div class="catalog-discovery fade-in" id="catalog-discovery">
+                    <div class="catalog-discovery__topline">
+                        <label class="catalog-search" for="catalog-search-input">
+                            <span class="catalog-search__icon" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input
+                                type="search"
+                                id="catalog-search-input"
+                                class="catalog-search__input"
+                                autocomplete="off"
+                                data-i18n-placeholder="cat_search_placeholder"
+                                data-i18n-aria="cat_search_label"
+                            >
+                            <button type="button" class="catalog-search__clear" id="catalog-search-clear" data-i18n-aria="cat_search_clear" hidden>
+                                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                            </button>
+                        </label>
+                        <p class="catalog-results-count" id="catalog-results-count" role="status" aria-live="polite"></p>
+                    </div>
+
+                    <nav class="catalog-filter-root catalog-filter-bar" aria-labelledby="catalog-filter-heading">
+                        <h2 class="catalog-filter-title" id="catalog-filter-heading" data-i18n="cat_filter_label"></h2>
+                        <div class="catalog-filter-stack">
+                            <button type="button" class="catalog-filter-btn active" data-catalog-filter="all" aria-pressed="true" data-i18n="cat_filter_all"></button>
+                            <button type="button" class="catalog-filter-btn" data-catalog-filter="science" aria-pressed="false" data-i18n="cat_filter_science"></button>
+                            <button type="button" class="catalog-filter-btn" data-catalog-filter="technology" aria-pressed="false" data-i18n="cat_filter_technology"></button>
+                            <button type="button" class="catalog-filter-btn" data-catalog-filter="engineering" aria-pressed="false" data-i18n="cat_filter_engineering"></button>
+                            <button type="button" class="catalog-filter-btn" data-catalog-filter="mathematics" aria-pressed="false" data-i18n="cat_filter_mathematics"></button>
+                            <button type="button" class="catalog-filter-btn" data-catalog-filter="neurodiversity" aria-pressed="false" data-i18n="cat_filter_neurodiversity"></button>
+                            <button type="button" class="catalog-filter-btn" data-catalog-filter="certification" aria-pressed="false" data-i18n="cat_filter_certification"></button>
+                            <button type="button" class="catalog-filter-btn" data-catalog-filter="physical" aria-pressed="false" data-i18n="cat_filter_physical"></button>
+                            <button type="button" class="catalog-filter-btn" data-catalog-filter="dissidents" aria-pressed="false" data-i18n="cat_filter_dissidents"></button>
+                        </div>
+                    </nav>
+                </div>
+
+                <div class="catalog-grid-area">
+                    <div class="row catalog-products-row" id="catalog-products-container">
+
+                    </div>
+                    <div class="catalog-empty-state" id="catalog-empty-state" hidden>
+                        <span class="catalog-empty-state__icon" aria-hidden="true"><i class="fa-solid fa-folder-open"></i></span>
+                        <h2 data-i18n="cat_empty_title"></h2>
+                        <p data-i18n="cat_empty_copy"></p>
+                    </div>
+                    <nav class="catalog-pagination" id="catalog-pagination" data-i18n-aria="cat_pagination_label"></nav>
+                </div>
+
+                <div class="row catalog-publish-row">
+                    <div class="col-12">
+                        <section class="catalog-publish-wrap fade-in" aria-labelledby="catalog-publish-cta-title">
+                            <div class="catalog-publish-copy">
+                                <h2 class="section-title mb-3" id="catalog-publish-cta-title" data-i18n="catalog_publish_cta_title"></h2>
+                                <p class="catalog-publish-lead mb-4" data-i18n="catalog_publish_cta_lead"></p>
+                                <div class="d-flex flex-wrap gap-3 catalog-publish-actions">
+                                    <a class="btn btn-luddies btn-luddies--primary" href="contact.html" data-i18n="catalog_publish_cta_contact"></a>
+                                    <a class="btn btn-luddies btn-luddies--outline" href="terms.html" data-i18n="catalog_publish_cta_terms"></a>
+                                </div>
+                            </div>
+                            <div class="catalog-publish-art" aria-hidden="true">
+                                <picture>
+                                    <source srcset="../images/luddees/identity-v2/cta/catalog-publisher-lumo-v1.webp" type="image/webp">
+                                    <img
+                                        class="catalog-publish-render"
+                                        src="../images/luddees/identity-v2/cta/catalog-publisher-lumo-v1.png"
+                                        alt=""
+                                        width="1122"
+                                        height="1402"
+                                        loading="lazy"
+                                        decoding="async"
+                                    >
+                                </picture>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="site-footer" class="footer-lite"></footer>
+
+    <div
+        id="catalog-cart-toast"
+        class="catalog-cart-toast"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        hidden
+    >
+        <span class="catalog-cart-toast__icon" aria-hidden="true"><i class="fa-solid fa-circle-check"></i></span>
+        <div class="catalog-cart-toast__body">
+            <p class="catalog-cart-toast__msg" id="catalog-cart-toast-msg"></p>
+            <a class="catalog-cart-toast__link" href="checkout.html" data-i18n="cat_cart_review"></a>
+        </div>
+        <button type="button" class="catalog-cart-toast__close" id="catalog-cart-toast-close">
+            <span aria-hidden="true">&times;</span>
+            <span class="visually-hidden" data-i18n="cat_cart_toast_close"></span>
+        </button>
+    </div>
+
+    <div class="catalog-cart-bar" id="catalog-cart-bar" hidden>
+        <span class="catalog-cart-bar-text" id="catalog-cart-bar-text" aria-live="polite"></span>
+        <a class="btn btn-sm btn-luddies btn-luddies--secondary" href="checkout.html" data-i18n="cat_cart_review"></a>
+        <button type="button" class="btn btn-sm btn-luddies btn-luddies--outline" id="catalog-cart-clear" data-i18n="cat_cart_clear"></button>
+    </div>
+    <p class="sr-only-visually-hidden" id="catalog-cart-live" aria-live="assertive"></p>
+
+    <script src="../js/layout.js?v=nav-stability-v1"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script defer src="../js/i18n.js"></script>
+    <script defer src="../js/brand-assets.js?v=visual-v9"></script>
+    <script defer src="../js/auth-ui.js?v=nav-login-v2"></script>
+    <script defer src="../js/catalog-builder.js?v=product-links-v1"></script>
+    <script defer src="../js/fade-in.js"></script>
+    <script defer src="../js/catalog-filter.js?v=discovery-v3"></script>
+    <script defer src="../js/catalog-cart.js?v=cart-feedback-v1"></script>
+
+    <template id="catalog-card-tpl">
+  <div class="col-12 col-md-6 col-xl-3 catalog-grid-item">
+    <article class="brand-card asset-card catalog-card h-100 d-flex flex-column">
+      <a class="asset-thumbnail catalog-card-media js-product-detail-link" href="product.html">
+        <img class="catalog-card-img" src="" alt="" width="800" height="800">
+        <span class="catalog-badge asset-badge badge-new"></span>
+      </a>
+      <div class="asset-body catalog-card-body">
+        <p class="catalog-card-meta"></p>
+        <h3 class="catalog-card-title h5"><a class="catalog-card-title-link js-product-detail-link" href="product.html"></a></h3>
+        <p class="catalog-card-desc"></p>
+        <p class="catalog-card-price"></p>
+        <div class="catalog-card-actions">
+          <button type="button"
+            class="btn btn-sm btn-luddies btn-luddies--primary js-catalog-acquire"
+          ></button>
+          <a class="btn btn-sm btn-luddies btn-luddies--outline js-product-detail-link"
+             href="product.html"
+          ></a>
+        </div>
+      </div>
+    </article>
+  </div>
+</template>
+
+</body>
+</html>

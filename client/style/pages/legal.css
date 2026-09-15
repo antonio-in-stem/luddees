@@ -1,0 +1,141 @@
+.page-legal { background: #fbf8f3; }
+
+.page-legal .legal-hero {
+    min-height: 41rem;
+    overflow: hidden;
+    padding: calc(7.5rem + env(safe-area-inset-top, 0px)) 0 4rem;
+    background: var(--brand-navy, #25263f);
+    color: #fff;
+}
+
+.legal-hero__stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(26rem, 1.1fr);
+    align-items: center;
+    min-height: 29rem;
+}
+
+.legal-hero__copy { position: relative; z-index: 2; max-width: 39rem; }
+
+.legal-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    margin-bottom: 1rem;
+    padding: .42rem .9rem;
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 999px;
+    background: rgba(255,255,255,.08);
+    color: rgba(255,255,255,.82);
+    font-size: .78rem;
+    font-weight: 900;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+}
+
+.page-legal .legal-hero .hero-title {
+    max-width: 38rem;
+    color: #fff;
+    font-size: clamp(3.8rem, 6.5vw, 6.5rem);
+    line-height: .92;
+}
+
+.page-legal .legal-hero .hero-lead { max-width: 34rem; color: rgba(255,255,255,.74) !important; }
+
+.legal-hero__render {
+    position: absolute;
+    right: -3rem;
+    bottom: -3.5rem;
+    z-index: 1;
+    display: block;
+    width: min(52vw, 47rem);
+    pointer-events: none;
+    filter: drop-shadow(0 1.6rem 1.6rem rgba(0,0,0,.22));
+}
+
+.legal-hero__render img { display: block; width: 100%; height: auto; }
+
+.legal-content-section {
+    position: relative;
+    padding-top: clamp(3rem, 6vw, 5.5rem);
+    background: radial-gradient(circle, rgba(168,88,107,.1) 1.2px, transparent 1.2px) 0 0 / 22px 22px, #fbf8f3;
+}
+
+.legal-wrap {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    counter-reset: legal-section;
+}
+
+.legal-date {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin: 0 0 .5rem;
+    padding: .55rem .9rem;
+    border-radius: 999px;
+    background: #e9e6ff;
+    color: #55556f;
+    font-size: .78rem;
+    font-weight: 800;
+}
+
+.legal-body {
+    position: relative;
+    counter-increment: legal-section;
+    min-width: 0;
+    padding: 2.25rem 2rem 2rem;
+    border: 2px solid #deddf1;
+    border-radius: 1.65rem;
+    background: rgba(255,255,255,.97);
+    box-shadow: 0 .45rem 0 #e7dfd6;
+}
+
+.legal-body::before {
+    content: counter(legal-section, decimal-leading-zero);
+    display: inline-grid;
+    place-items: center;
+    width: 2.55rem;
+    height: 2.55rem;
+    margin-bottom: 1rem;
+    border-radius: .8rem;
+    background: var(--brand-navy, #25263f);
+    color: #fff;
+    font-family: "Lilita One", sans-serif;
+    font-size: 1rem;
+}
+
+.legal-body h2,
+.legal-body h3,
+.legal-section-title {
+    margin: 0 0 .8rem;
+    color: var(--brand-navy, #25263f);
+    font-family: "Lilita One", "Nunito Sans", sans-serif;
+    font-size: clamp(1.5rem, 2.3vw, 2rem);
+    line-height: 1.1;
+}
+
+.legal-body p,
+.legal-body ul { margin-bottom: .8rem; color: #666474; font-size: .94rem; font-weight: 600; line-height: 1.75; }
+.legal-body ul { padding-left: 1.25rem; }
+.legal-body ul li { margin-bottom: .4rem; }
+.legal-body a { color: #7c3949; font-weight: 900; text-decoration-thickness: 2px; }
+.legal-divider { display: none; }
+
+@media (max-width: 991.98px) {
+    .legal-hero__stage { grid-template-columns: minmax(0, 1fr) minmax(18rem, .8fr); }
+    .legal-hero__render { right: -7rem; width: min(66vw, 44rem); }
+    .legal-wrap { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 767.98px) {
+    .page-legal .legal-hero { min-height: 42rem; padding-top: calc(7rem + env(safe-area-inset-top, 0px)); }
+    .legal-hero__stage { grid-template-columns: 1fr; align-items: start; }
+    .legal-hero__render { right: -6rem; bottom: -3rem; width: min(108vw, 36rem); }
+    .page-legal .legal-hero .hero-title { font-size: clamp(3.3rem, 16vw, 4.7rem); }
+    .legal-content-section { padding-inline: .35rem; }
+    .legal-body { padding: 1.65rem 1.35rem; border-radius: 1.35rem; }
+}

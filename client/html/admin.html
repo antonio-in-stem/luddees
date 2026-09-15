@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Luddies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../style/tokens.css">
+    <link rel="stylesheet" href="../style/base.css">
+    <link rel="stylesheet" href="../style/components.css">
+    <link rel="stylesheet" href="../style/layout.css">
+    <link rel="stylesheet" href="../style/pages/admin.css?v=admin-v8">
+    <link rel="stylesheet" href="../style/luddees.css?v=visual-v34">
+    <link rel="stylesheet" href="../style/responsive.css?v=qa-v1">
+    <script src="../js/luddies-storage-keys.js"></script>
+    <script src="../js/catalog-seed.js"></script>
+    <script src="../js/config.js?v=api-mode-v2"></script>
+    <script src="../js/luddies-api.js"></script>
+    <script src="../js/catalog-api-mapper.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/auth-guard.js"></script>
+</head>
+<body class="page-admin" data-site-page="admin">
+    <header id="site-header"></header>
+
+    <main>
+        <section class="hero-about admin-hero">
+            <div class="container admin-hero__stage">
+                <div class="admin-hero__copy fade-in">
+                    <h1 class="hero-title" data-i18n="admin_page_title">Administration</h1>
+                    <p class="hero-lead" data-i18n="admin_hero_lead">Catalog and accounts.</p>
+                    <p class="admin-hero-desc" data-i18n="admin_hero_desc">Manage products and users from this screen.</p>
+                </div>
+                <picture class="admin-hero__render fade-in" aria-hidden="true">
+                    <source srcset="../images/luddees/identity-v2/sections/resource-workflow-lumo-v1.webp" type="image/webp">
+                    <img src="../images/luddees/identity-v2/sections/resource-workflow-lumo-v1.png" width="1536" height="1536" alt="">
+                </picture>
+            </div>
+        </section>
+
+        <section class="page-section admin-workspace">
+            <div class="container">
+                <div class="alert alert-warning d-none" id="admin-page-error" role="alert"></div>
+                <ul class="nav nav-pills admin-tabs-nav gap-2 mb-4" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="admin-tab-pill" data-bs-toggle="pill" data-bs-target="#admin-tab-products" type="button" role="tab" data-i18n="admin_tab_products">Products</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="admin-tab-users-pill" data-bs-toggle="pill" data-bs-target="#admin-tab-users" type="button" role="tab" data-i18n="admin_tab_users">Users</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="admin-tab-products" role="tabpanel">
+                        <div class="admin-toolbar">
+                            <h2 class="h5 mb-0" data-i18n="admin_tab_products">Products</h2>
+                            <div class="admin-toolbar__actions">
+                                <label for="admin-products-sort" class="admin-sort-label" data-i18n="admin_sort_label">Sort by</label>
+                                <select id="admin-products-sort" class="admin-sort-select" aria-label="Sort products">
+                                    <option value="created_desc" data-i18n="admin_sort_created_desc">Most recent</option>
+                                    <option value="created_asc" data-i18n="admin_sort_created_asc">Oldest</option>
+                                    <option value="updated_desc" data-i18n="admin_sort_updated_desc">Recently updated</option>
+                                    <option value="updated_asc" data-i18n="admin_sort_updated_asc">Least recently updated</option>
+                                    <option value="name_asc" data-i18n="admin_sort_name_asc">Name A–Z</option>
+                                    <option value="name_desc" data-i18n="admin_sort_name_desc">Name Z–A</option>
+                                </select>
+                                <button type="button" class="btn btn-luddies btn-luddies--primary" id="admin-btn-new-product" data-i18n="admin_btn_add_product">New product</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive admin-table-shell admin-products-table-shell">
+                            <table class="table align-middle mb-0 admin-data-table admin-product-table">
+                                <thead class="admin-table-head">
+                                    <tr>
+                                        <th scope="col" data-i18n="admin_col_id">ID</th>
+                                        <th scope="col" data-i18n="admin_col_name">Name</th>
+                                        <th scope="col" data-i18n="admin_col_category">Category</th>
+                                        <th scope="col" data-i18n="admin_col_actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-products-tbody"></tbody>
+                            </table>
+                        </div>
+                        <div id="admin-products-pagination" class="admin-pagination-wrap"></div>
+                    </div>
+                    <div class="tab-pane fade" id="admin-tab-users" role="tabpanel">
+                        <div class="admin-toolbar">
+                        <h2 class="h5 mb-3" data-i18n="admin_tab_users">Users</h2>
+                            <div class="table-responsive admin-table-shell admin-users-table-shell">
+                                <table class="table align-middle mb-0 admin-data-table admin-user-table">
+                                    <thead class="admin-table-head">
+                                        <tr>
+                                            <th scope="col" data-i18n="admin_user_col_name">Name</th>
+                                            <th scope="col" data-i18n="admin_user_col_email">Email</th>
+                                            <th scope="col" data-i18n="admin_user_col_role">Role</th>
+                                            <th scope="col" data-i18n="admin_col_actions">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-users-tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="site-footer" class="footer-lite"></footer>
+
+    <div class="modal fade" id="product-form-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h2 class="modal-title h5" data-i18n="admin_modal_product_title">Product</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger d-none" id="admin-form-error" role="alert"></div>
+                    <form id="product-form" novalidate>
+                        <input type="hidden" id="product-id" name="id" value="">
+                        <div class="admin-layout">
+                            <div>
+                                <div class="admin-form-card">
+                                    <p class="admin-section-label">
+                                        <span class="pill-icon" style="width:1.8rem;height:1.8rem;font-size:0.75rem;" aria-hidden="true"><i class="fa-solid fa-tag"></i></span>
+                                        <span data-i18n="admin_form_section_info">Product information</span>
+                                    </p>
+                                    <p class="small text-secondary mb-3" data-i18n="admin_form_bilingual_note">Product copy (ES and EN).</p>
+                                    <div class="field-row">
+                                        <div class="field-group mb-0">
+                                            <label class="field-label" for="product-name-es"><span data-i18n="admin_form_name_es">Title (ES)</span> <span class="req">*</span></label>
+                                            <input type="text" class="field-input" id="product-name-es" name="nameEs" required autocomplete="off">
+                                        </div>
+                                        <div class="field-group mb-0">
+                                            <label class="field-label" for="product-name-en"><span data-i18n="admin_form_name_en">Title (EN)</span> <span class="req">*</span></label>
+                                            <input type="text" class="field-input" id="product-name-en" name="nameEn" required autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="field-row">
+                                        <div class="field-group mb-0">
+                                            <label class="field-label" for="product-meta-es"><span data-i18n="admin_form_meta_es">Meta (ES)</span> <span class="req">*</span></label>
+                                            <input type="text" class="field-input" id="product-meta-es" name="metaEs" required autocomplete="off">
+                                        </div>
+                                        <div class="field-group mb-0">
+                                            <label class="field-label" for="product-meta-en"><span data-i18n="admin_form_meta_en">Meta (EN)</span> <span class="req">*</span></label>
+                                            <input type="text" class="field-input" id="product-meta-en" name="metaEn" required autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="field-row">
+                                        <div class="field-group mb-0">
+                                            <label class="field-label" for="product-desc-es"><span data-i18n="admin_form_desc_es">Description (ES)</span> <span class="req">*</span></label>
+                                            <textarea class="field-textarea" id="product-desc-es" name="descEs" required></textarea>
+                                        </div>
+                                        <div class="field-group mb-0">
+                                            <label class="field-label" for="product-desc-en"><span data-i18n="admin_form_desc_en">Description (EN)</span> <span class="req">*</span></label>
+                                            <textarea class="field-textarea" id="product-desc-en" name="descEn" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="field-row">
+                                        <div class="field-group mb-0">
+                                            <label class="field-label" for="product-price-es"><span data-i18n="admin_form_price_es">Price (ES)</span> <span class="req">*</span></label>
+                                            <input type="text" class="field-input" id="product-price-es" name="priceEs" required autocomplete="off">
+                                        </div>
+                                        <div class="field-group mb-0">
+                                            <label class="field-label" for="product-price-en"><span data-i18n="admin_form_price_en">Price (EN)</span> <span class="req">*</span></label>
+                                            <input type="text" class="field-input" id="product-price-en" name="priceEn" required autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="field-group">
+                                        <label class="field-label" for="f-img"><span data-i18n="admin_form_img">Image URL</span> <span class="req">*</span></label>
+                                        <input type="url" class="field-input" id="f-img" name="img" maxlength="1024" required autocomplete="off">
+                                        <p class="field-hint mb-0" data-i18n="admin_form_img_help"></p>
+                                    </div>
+                                    <div class="img-preview-strip" id="img-preview-strip">
+                                        <div class="img-preview-placeholder"><i class="fa-regular fa-image"></i><span data-i18n="admin_preview_strip">Image preview</span></div>
+                                        <img id="img-preview-img" alt="">
+                                    </div>
+                                    <div class="divider-soft"></div>
+                                    <p class="admin-section-label">
+                                        <span class="pill-icon" style="width:1.8rem;height:1.8rem;font-size:0.75rem;" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span>
+                                        <span data-i18n="admin_form_category">Category</span> <span class="req">*</span>
+                                    </p>
+                                    <div class="cat-grid" id="cat-grid">
+                                        <label class="cat-chip"><input type="checkbox" value="science"><span class="dot"></span><span data-i18n="cat_filter_science">Science</span></label>
+                                        <label class="cat-chip"><input type="checkbox" value="technology"><span class="dot"></span><span data-i18n="cat_filter_technology">Technology</span></label>
+                                        <label class="cat-chip"><input type="checkbox" value="engineering"><span class="dot"></span><span data-i18n="cat_filter_engineering">Engineering</span></label>
+                                        <label class="cat-chip"><input type="checkbox" value="mathematics"><span class="dot"></span><span data-i18n="cat_filter_mathematics">Mathematics</span></label>
+                                        <label class="cat-chip"><input type="checkbox" value="neurodiversity"><span class="dot"></span><span data-i18n="cat_filter_neurodiversity">Neurodiversity</span></label>
+                                        <label class="cat-chip"><input type="checkbox" value="certification"><span class="dot"></span><span data-i18n="cat_filter_certification">Certification</span></label>
+                                        <label class="cat-chip"><input type="checkbox" value="physical"><span class="dot"></span><span data-i18n="cat_filter_physical">Physical kits</span></label>
+                                        <label class="cat-chip"><input type="checkbox" value="dissidents"><span class="dot"></span><span data-i18n="cat_filter_dissidents">STEM Dissidents</span></label>
+                                    </div>
+                                    <div class="field-group">
+                                        <label class="field-label" for="product-category-extra" data-i18n="admin_category_custom_label">Custom tags</label>
+                                        <input type="text" class="field-input" id="product-category-extra" name="categoryExtra" placeholder="" autocomplete="off">
+                                        <p class="field-hint mb-0" data-i18n="admin_category_custom_help"></p>
+                                    </div>
+                                    <div class="field-group">
+                                        <label class="field-label" for="product-purchasable" data-i18n="admin_form_purchasable">Purchasable</label>
+                                        <select class="form-select field-input" id="product-purchasable" name="purchasable" style="padding-top:0.65rem;padding-bottom:0.65rem;height:auto;">
+                                            <option value="1" data-i18n="admin_option_yes">Yes</option>
+                                            <option value="0" data-i18n="admin_option_no">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="divider-soft"></div>
+                                    <div class="d-flex flex-wrap gap-2 justify-content-end">
+                                        <button type="button" class="btn btn-luddies btn-luddies--outline" data-bs-dismiss="modal" data-i18n="admin_form_cancel">Cancel</button>
+                                        <button type="submit" class="btn btn-luddies btn-luddies--primary" data-i18n="admin_form_save">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <aside class="admin-sticky">
+                                <p class="admin-section-label" style="margin-bottom:0.85rem;">
+                                    <span class="pill-icon" style="width:1.8rem;height:1.8rem;font-size:0.75rem;" aria-hidden="true"><i class="fa-solid fa-eye"></i></span>
+                                    <span data-i18n="admin_preview_section">Preview</span>
+                                </p>
+                                <div class="preview-card mb-0">
+                                    <div class="preview-card__img" id="prev-img" role="img" aria-label=""><i class="fa-regular fa-image"></i></div>
+                                    <div class="preview-card__body">
+                                        <p class="preview-card__meta" id="prev-meta">—</p>
+                                        <h3 class="preview-card__title h6 mb-0" id="prev-title">—</h3>
+                                        <p class="preview-card__desc" id="prev-desc">—</p>
+                                        <p class="preview-card__price" id="prev-price">—</p>
+                                        <div class="preview-card__cats" id="prev-cats"></div>
+                                        <div class="preview-card__actions">
+                                            <button type="button" class="btn btn-sm btn-luddies btn-luddies--primary" tabindex="-1" data-i18n="cat_acquire_btn">Acquire</button>
+                                            <span class="btn btn-sm btn-luddies btn-luddies--outline" data-i18n="cat_prod_more_info">More info</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirm-delete-product-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p data-i18n="admin_confirm_delete_product">Delete this product?</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-luddies btn-luddies--outline" data-bs-dismiss="modal" data-i18n="admin_form_cancel">Cancel</button>
+                    <button type="button" class="btn btn-luddies btn-luddies--secondary" id="confirm-delete-product-ok" data-i18n="admin_btn_delete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirm-delete-user-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p data-i18n="admin_confirm_delete_user">Delete this user?</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-luddies btn-luddies--outline" data-bs-dismiss="modal" data-i18n="admin_form_cancel">Cancel</button>
+                    <button type="button" class="btn btn-luddies btn-luddies--secondary" id="confirm-delete-user-ok" data-i18n="admin_user_delete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/layout.js?v=nav-stability-v1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script defer src="../js/i18n.js"></script>
+    <script defer src="../js/brand-assets.js?v=visual-v9"></script>
+    <script defer src="../js/auth-ui.js?v=nav-login-v2"></script>
+    <script defer src="../js/fade-in.js"></script>
+    <script defer src="../js/admin-panel.js?v=table-v4"></script>
+    <script>
+        document.addEventListener("luddies:layout-ready", function () {
+            if (window.LuddiesI18n) window.LuddiesI18n.applyTranslations(window.LuddiesI18n.getLang());
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Luddies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../style/tokens.css">
+    <link rel="stylesheet" href="../style/base.css">
+    <link rel="stylesheet" href="../style/components.css">
+    <link rel="stylesheet" href="../style/pages/auth.css?v=auth-v9">
+    <link rel="stylesheet" href="../style/luddees.css?v=visual-v30">
+    <link rel="stylesheet" href="../style/responsive.css?v=qa-v1">
+    <script src="../js/luddies-storage-keys.js"></script>
+    <script src="../js/catalog-seed.js"></script>
+    <script src="../js/config.js?v=api-mode-v2"></script>
+    <script src="../js/luddies-api.js"></script>
+    <script src="../js/catalog-api-mapper.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/brand-assets.js?v=visual-v9"></script>
+</head>
+<body class="page-auth">
+    <header class="page-auth__hero">
+        <div class="container">
+            <div class="page-auth__brand">
+                <a href="index.html" class="page-auth__brand-link" data-i18n-aria="nav_home">
+                    <img data-luddies-brand-logo src="../images/luddees/identity-v2/brand/luddies-mark-white.svg" width="56" height="56" alt="" data-i18n="logo_alt">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow-1">
+        <div class="container">
+            <div class="page-auth__scene">
+                <picture class="page-auth__characters" aria-hidden="true">
+                    <source srcset="../images/luddees/identity-v2/auth/auth-welcome-peek-v1.webp" type="image/webp">
+                    <img src="../images/luddees/identity-v2/auth/auth-welcome-peek-v1.png" alt="" width="1536" height="1024">
+                </picture>
+                <div class="page-auth__card">
+                <h1 class="page-auth__title" data-i18n="auth_register_title">Create account</h1>
+                <p class="page-auth__lead" data-i18n="auth_register_lead">Join Luddies to access the platform.</p>
+                <p class="page-auth__demo-notice" data-i18n="auth_demo_notice" hidden></p>
+
+                <div class="alert alert-danger d-none" id="register-error-alert" role="alert"></div>
+
+                <form id="register-form" novalidate>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="reg-fullname" name="fullName" placeholder=" " autocomplete="name" required>
+                        <label for="reg-fullname" data-i18n="auth_label_fullname">Full name</label>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small text-muted" for="reg-phone" data-i18n="auth_label_phone">Teléfono</label>
+                        <div class="input-group">
+                            <select class="form-select" id="reg-country" name="country" style="max-width: 130px;">
+                                <option value="+52">MX +52</option>
+                                <option value="+1">US +1</option>
+                                <option value="+1">CA +1</option>
+                                <option value="+54">AR +54</option>
+                                <option value="+55">BR +55</option>
+                                <option value="+56">CL +56</option>
+                                <option value="+57">CO +57</option>
+                                <option value="+506">CR +506</option>
+                                <option value="+593">EC +593</option>
+                                <option value="+503">SV +503</option>
+                                <option value="+502">GT +502</option>
+                                <option value="+504">HN +504</option>
+                                <option value="+505">NI +505</option>
+                                <option value="+507">PA +507</option>
+                                <option value="+595">PY +595</option>
+                                <option value="+51">PE +51</option>
+                                <option value="+1809">DO +1809</option>
+                                <option value="+598">UY +598</option>
+                                <option value="+58">VE +58</option>
+                            </select>
+                            <input type="tel" class="form-control" id="reg-phone" name="phone"
+                                data-i18n-placeholder="auth_label_phone" autocomplete="tel"
+                                maxlength="11" inputmode="numeric" required>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="reg-email" name="email" placeholder=" " autocomplete="email" required>
+                        <label for="reg-email" data-i18n="auth_label_email">Email</label>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="reg-password" name="password" placeholder=" " autocomplete="new-password" required>
+                                <label for="reg-password" data-i18n="auth_label_password">Password</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="reg-confirm" name="confirm" placeholder=" " autocomplete="new-password" required>
+                                <label for="reg-confirm" data-i18n="auth_label_confirm">Confirm password</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-luddies btn-luddies--primary w-100" data-i18n="auth_btn_register">Register</button>
+                </form>
+
+                    <p class="page-auth__footer">
+                        <a href="login.html" data-i18n="auth_link_signin">Back to sign in</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../js/i18n.js"></script>
+    <script src="../js/register.js"></script>
+    <script src="../js/auth-page.js"></script>
+</body>
+</html>

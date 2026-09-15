@@ -1,0 +1,18 @@
+:root {
+    --primary-accent: #a29bfe;
+    --secondary-accent: #9e6c7c;
+    --bg-soft: #f8f9fd;
+    --text-main: #4a3f4d;
+    --soft-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+
+    --section-padding-y: 3.5rem;
+    --section-padding-y-sm: 2.5rem;
+    --section-padding-x: 0;
+    --navbar-padding-y: 0.5rem;
+    --card-padding: 1rem;
+    --card-padding-lg: 1.25rem;
+    --container-inline-padding: var(--bs-gutter-x, 0.75rem);
+    --luddies-bg-gradient: radial-gradient(circle at 100% 0%, rgba(162, 155, 254, 0.2), transparent 42%),
+        radial-gradient(circle at 0% 100%, rgba(158, 108, 124, 0.16), transparent 38%);
+    --luddies-btn-radius: 0.9rem;
+}

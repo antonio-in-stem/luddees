@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luddies | Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../style/tokens.css">
+    <link rel="stylesheet" href="../style/base.css">
+    <link rel="stylesheet" href="../style/components.css">
+    <link rel="stylesheet" href="../style/layout.css">
+    <link rel="stylesheet" href="../style/pages/home.css">
+    <link rel="stylesheet" href="../style/luddees.css?v=visual-v39">
+    <link rel="stylesheet" href="../style/responsive.css?v=qa-v1">
+    <script src="../js/luddies-storage-keys.js"></script>
+    <script src="../js/catalog-seed.js"></script>
+    <script src="../js/config.js?v=api-mode-v2"></script>
+    <script src="../js/luddies-api.js"></script>
+    <script src="../js/catalog-api-mapper.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/auth-guard.js"></script>
+</head>
+<body class="page-home" data-site-page="home">
+    <header id="site-header"></header>
+
+    <main>
+        <section class="hero-about home-hero-section luddees-home-hero">
+            <div class="container luddees-hero-stage">
+                <div class="row align-items-center g-4 w-100">
+                    <div class="col-12 col-lg-7 fade-in luddees-hero-copy">
+                        <p class="luddees-eyebrow" data-i18n="home_hero_eyebrow">Marketplace educativo STEM+</p>
+                        <h1 class="hero-title mb-3" data-i18n="home_hero_title"></h1>
+                        <p class="hero-lead mb-4" data-i18n="home_hero_lead"></p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a class="btn btn-luddies btn-luddies--primary" href="catalog.html" data-i18n="home_cta_band_catalog"></a>
+                            <a class="btn btn-luddies btn-luddies--secondary" href="contact.html" data-i18n="home_cta_band_contact"></a>
+                        </div>
+                        <div class="hero-partners" aria-label="Instituciones educativas de ejemplo">
+                            <p class="hero-partners__label" data-i18n="home_partners_label"></p>
+                            <div class="hero-partners__marks" role="list">
+                                <span class="partner-mark partner-mark--aulora" role="listitem">
+                                    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 18c5-8 17-8 22 0-5 8-17 8-22 0Z"/><circle cx="16" cy="18" r="4"/><path d="M16 4v5M6.5 8.5l3.5 3M25.5 8.5l-3.5 3"/></svg>
+                                    <strong>Aulora</strong>
+                                </span>
+                                <span class="partner-mark partner-mark--horizonte" role="listitem">
+                                    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22h22M9 22a7 7 0 0 1 14 0M16 6v5M7 11l4 3M25 11l-4 3"/></svg>
+                                    <strong>Horizonte</strong>
+                                </span>
+                                <span class="partner-mark partner-mark--nexo" role="listitem">
+                                    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="10" cy="16" r="6"/><circle cx="22" cy="16" r="6"/><path d="M13 16h6"/></svg>
+                                    <strong>NexoLab</strong>
+                                </span>
+                                <span class="partner-mark partner-mark--prisma" role="listitem">
+                                    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m16 5 11 21H5L16 5Z"/><path d="m16 5 2 21"/></svg>
+                                    <strong>Prisma</strong>
+                                </span>
+                                <span class="partner-mark partner-mark--abaco" role="listitem">
+                                    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 7h20M6 16h20M6 25h20"/><circle cx="11" cy="7" r="2.5"/><circle cx="20" cy="16" r="2.5"/><circle cx="15" cy="25" r="2.5"/></svg>
+                                    <strong>Ábaco</strong>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5 luddees-hero-art">
+                        <div class="hero-image-wrap render-stage--breakout" aria-hidden="true">
+                            <img class="render-breakout" src="../images/luddees/identity-v2/hero/home-portfolio-breakout-v2.webp" alt="" width="1448" height="1086" fetchpriority="high">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="home-audience-strip" aria-label="Audiencias de Luddies">
+            <div class="trusted-badge hero-trusted-badge">
+                <p class="trust-title">Pensado para</p>
+                <div class="trust-logos">
+                    <span>Docentes</span>
+                    <span>Escuelas</span>
+                    <span>Familias</span>
+                    <span>Creadores STEM</span>
+                </div>
+            </div>
+        </aside>
+
+        <section class="page-section luddees-featured-section" id="destacados-home">
+            <div class="container">
+                <div class="text-center mb-5 fade-in">
+                    <h2 class="section-title mb-2" data-i18n="home_featured_title"></h2>
+                    <p class="section-subtitle" data-i18n="home_value_subtitle"></p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-12 col-md-4 fade-in">
+                        <a class="brand-card asset-card home-product-card h-100" href="catalog.html#destacados">
+                            <div class="asset-thumbnail">
+                                <img src="../images/luddees/identity-v2/covers/science-experiments-v1.webp" alt="" width="1024" height="1024">
+                                <span class="asset-badge badge-new">STEM</span>
+                            </div>
+                            <div class="asset-body">
+                                <p class="catalog-card-meta" data-i18n="home_line_digital_title"></p>
+                                <h3 class="asset-title" data-i18n="home_feat_1_title"></h3>
+                                <p data-i18n="home_feat_1_desc"></p>
+                                <span class="home-featured-more" data-i18n="home_cta_band_catalog"></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4 fade-in">
+                        <a class="brand-card asset-card home-product-card h-100" href="catalog.html#destacados">
+                            <div class="asset-thumbnail">
+                                <img src="../images/luddees/identity-v2/covers/inclusive-routines-v1.webp" alt="" width="1024" height="1024">
+                                <span class="asset-badge badge-trending">Inclusivo</span>
+                            </div>
+                            <div class="asset-body">
+                                <p class="catalog-card-meta" data-i18n="home_line_neuro_title"></p>
+                                <h3 class="asset-title" data-i18n="home_feat_3_title"></h3>
+                                <p data-i18n="home_feat_3_desc"></p>
+                                <span class="home-featured-more" data-i18n="home_cta_band_catalog"></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4 fade-in">
+                        <a class="brand-card asset-card home-product-card h-100" href="catalog.html#destacados">
+                            <div class="asset-thumbnail">
+                                <img src="../images/luddees/identity-v2/covers/geometry-bridge-v1.webp" alt="" width="1024" height="1024">
+                                <span class="asset-badge badge-bestseller">Reto</span>
+                            </div>
+                            <div class="asset-body">
+                                <p class="catalog-card-meta" data-i18n="home_line_cert_title"></p>
+                                <h3 class="asset-title" data-i18n="home_girls_title"></h3>
+                                <p data-i18n="home_girls_lead"></p>
+                                <span class="home-featured-more" data-i18n="home_cta_band_catalog"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="impact-band luddees-impact-band">
+            <div class="container">
+                <div class="text-center mb-5 fade-in">
+                    <h2 class="section-title text-white mb-2" data-i18n="home_value_title"></h2>
+                    <p class="hero-lead mx-auto" data-i18n="home_value_subtitle"></p>
+                </div>
+                <div class="row impact-grid">
+                    <div class="col-12 col-md-4 fade-in">
+                        <article class="impact-module">
+                            <picture class="impact-render" aria-hidden="true">
+                                <source srcset="../images/luddees/identity-v2/values/community-school-v1.webp" type="image/webp">
+                                <img src="../images/luddees/identity-v2/values/community-school-v1.png" alt="" width="1254" height="1254">
+                            </picture>
+                            <h3 class="impact-title" data-i18n="home_val_b2b_title"></h3>
+                            <p class="impact-text" data-i18n="home_val_b2b_desc"></p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-4 fade-in">
+                        <article class="impact-module">
+                            <picture class="impact-render" aria-hidden="true">
+                                <source srcset="../images/luddees/identity-v2/values/latam-stem-v1.webp" type="image/webp">
+                                <img src="../images/luddees/identity-v2/values/latam-stem-v1.png" alt="" width="1254" height="1254">
+                            </picture>
+                            <h3 class="impact-title" data-i18n="home_val_spanish_title"></h3>
+                            <p class="impact-text" data-i18n="home_val_spanish_desc"></p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-4 fade-in">
+                        <article class="impact-module">
+                            <picture class="impact-render" aria-hidden="true">
+                                <source srcset="../images/luddees/identity-v2/values/resource-hierarchy-v1.webp" type="image/webp">
+                                <img src="../images/luddees/identity-v2/values/resource-hierarchy-v1.png" alt="" width="1350" height="1165">
+                            </picture>
+                            <h3 class="impact-title" data-i18n="home_val_standard_title"></h3>
+                            <p class="impact-text" data-i18n="home_val_standard_desc"></p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section" id="alianzas">
+            <div class="container">
+                <div class="cta-banner row align-items-center mx-0 fade-in render-stage--breakout">
+                    <div class="col-12 col-lg-7 position-relative z-2">
+                        <div class="cta-label">Potencia tu enseñanza</div>
+                        <h2 class="cta-title" data-i18n="home_cta_band_title"></h2>
+                        <p class="home-cta-band-lead" data-i18n="home_cta_band_lead"></p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a class="btn btn-luddies btn-luddies--primary" href="catalog.html" data-i18n="home_cta_band_catalog"></a>
+                            <a class="btn btn-luddies btn-luddies--outline" href="contact.html" data-i18n="home_cta_band_contact"></a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5 cta-art-stage render-stage--breakout" aria-hidden="true">
+                        <img class="cta-breakout-image render-breakout" src="../images/luddees/identity-v2/cta/creator-miga-v1.webp" alt="" width="1122" height="1402">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="metrics-wrapper luddees-metrics">
+            <div class="container text-center">
+                <h2 class="metrics-heading" data-i18n="home_lines_title"></h2>
+                <div class="row g-4 justify-content-center mt-3">
+                    <div class="col-12 col-sm-6 col-lg-3 fade-in">
+                        <article class="metric-card metric-card--assets">
+                            <div class="metric-counter">
+                                <span class="metric-counter__decor" aria-hidden="true"></span>
+                                <p class="metric-number">120</p>
+                            </div>
+                            <p class="metric-label" data-i18n="home_line_digital_title"></p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 fade-in">
+                        <article class="metric-card metric-card--science">
+                            <div class="metric-counter">
+                                <span class="metric-counter__decor" aria-hidden="true"></span>
+                                <p class="metric-number">8</p>
+                            </div>
+                            <p class="metric-label" data-i18n="cat_filter_science"></p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 fade-in">
+                        <article class="metric-card metric-card--structure">
+                            <div class="metric-counter">
+                                <span class="metric-counter__decor" aria-hidden="true"></span>
+                                <p class="metric-number">4</p>
+                            </div>
+                            <p class="metric-label" data-i18n="home_hierarchy_title"></p>
+                        </article>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 fade-in">
+                        <article class="metric-card metric-card--language">
+                            <div class="metric-counter">
+                                <span class="metric-counter__decor" aria-hidden="true"></span>
+                                <p class="metric-number">2</p>
+                            </div>
+                            <p class="metric-label" data-i18n="home_metric_languages">Idiomas</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section process-wrapper" id="organizacion">
+            <div class="container">
+                <div class="section-header justify-content-center text-center flex-column mb-5 fade-in">
+                    <h2 class="section-title text-center w-100" data-i18n="home_hierarchy_title"></h2>
+                    <p class="fw-bold mt-3 fs-5 max-w-700" data-i18n="home_hierarchy_subtitle"></p>
+                </div>
+                <div class="home-highlight-block fade-in">
+                    <div class="organization-mechanism-strip" aria-hidden="true">
+                        <img src="../images/luddees/identity-v2/sections/organization-workflow-objects-v1.webp" alt="" width="2172" height="724">
+                    </div>
+                    <div class="home-steps">
+                        <div class="home-step">
+                            <div class="home-step-object home-step-object--focus" aria-hidden="true"></div>
+                            <div class="home-step-icon">01</div>
+                            <p class="home-step-title" data-i18n="home_step_focus"></p>
+                            <p class="home-step-desc" data-i18n="home_step_focus_desc"></p>
+                            <p class="home-step-example" data-i18n="home_step_focus_example"></p>
+                        </div>
+                        <div class="home-step">
+                            <div class="home-step-object home-step-object--theme" aria-hidden="true"></div>
+                            <div class="home-step-icon">02</div>
+                            <p class="home-step-title" data-i18n="home_step_theme"></p>
+                            <p class="home-step-desc" data-i18n="home_step_theme_desc"></p>
+                            <p class="home-step-example" data-i18n="home_step_theme_example"></p>
+                        </div>
+                        <div class="home-step">
+                            <div class="home-step-object home-step-object--class" aria-hidden="true"></div>
+                            <div class="home-step-icon">03</div>
+                            <p class="home-step-title" data-i18n="home_step_class"></p>
+                            <p class="home-step-desc" data-i18n="home_step_class_desc"></p>
+                            <p class="home-step-example" data-i18n="home_step_class_example"></p>
+                        </div>
+                        <div class="home-step">
+                            <div class="home-step-object home-step-object--reinforce" aria-hidden="true"></div>
+                            <div class="home-step-icon">04</div>
+                            <p class="home-step-title" data-i18n="home_step_reinforce"></p>
+                            <p class="home-step-desc" data-i18n="home_step_reinforce_desc"></p>
+                            <p class="home-step-example" data-i18n="home_step_reinforce_example"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="creator-cta-band">
+            <div class="container">
+                <div class="creator-cta-composition fade-in">
+                    <div class="creator-cta-art" aria-hidden="true">
+                        <img src="../images/luddees/identity-v2/sections/resource-workflow-lumo-v1.webp" alt="" class="process-render" width="1536" height="1024">
+                    </div>
+                    <div class="creator-cta-copy">
+                        <h2 class="creator-cta-title" data-i18n="home_cta_band_title"></h2>
+                        <div class="mt-4">
+                            <a class="btn btn-luddies btn-luddies--primary btn-creator" href="register.html" data-i18n="auth_link_register"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="site-footer" class="footer-lite"></footer>
+
+    <script src="../js/layout.js?v=nav-stability-v1"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script defer src="../js/i18n.js?v=home-copy-v3"></script>
+    <script defer src="../js/brand-assets.js?v=visual-v9"></script>
+    <script defer src="../js/auth-ui.js?v=nav-login-v2"></script>
+    <script defer src="../js/fade-in.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Luddies</title>
+  <rect x="4" y="4" width="120" height="120" rx="30" fill="#565676"/>
+  <path d="M30 61C22.3 40.3 22.5 14.2 36.8 5.8c7.8-4.5 14.6 1.5 17.7 11.4 4.7 15.3 2.7 31.6-.5 44L30 61Z" fill="#c38d94"/>
+  <path d="M80.9 60.2c.2-13.6 4.4-30.7 16.4-37.5 8.5-4.9 17.3-.8 18.3 7 1.7 13-12.1 24.5-22.8 35.4l-11.9-4.9Z" fill="#c38d94"/>
+  <path d="M14 80.6C14 53.6 34.8 40 64 40s50 13.6 50 40.6C114 109.4 93.2 122 64 122S14 109.4 14 80.6Z" fill="#c38d94"/>
+  <ellipse cx="50" cy="78" rx="13" ry="17" fill="#fff9ee"/>
+  <ellipse cx="82" cy="78" rx="13" ry="17" fill="#fff9ee"/>
+  <ellipse cx="52" cy="81" rx="5.5" ry="8.5" fill="#27273d"/>
+  <ellipse cx="80" cy="81" rx="5.5" ry="8.5" fill="#27273d"/>
+  <circle cx="50.3" cy="77.4" r="1.8" fill="#fff"/>
+  <circle cx="78.3" cy="77.4" r="1.8" fill="#fff"/>
+  <path d="M57 101c5 4.8 11 4.8 16 0" fill="none" stroke="#74404b" stroke-width="5" stroke-linecap="round"/>
+</svg>
